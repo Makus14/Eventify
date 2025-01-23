@@ -1,0 +1,88 @@
+.navBar {
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 12px;
+  margin-top: 2%;
+  margin-left: 3%;
+  margin-right: 3%;
+}
+
+.eventifyTitle {
+  display: flex;
+  margin-left: 30px;
+}
+
+.eventifyIcon {
+  margin-right: 10px;
+  width: 60px;
+  height: 60px;
+}
+
+.category {
+  display: flex;
+  align-items: center;
+  justify-content: "center";
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.categoryButton {
+  display: flex;
+  align-items: center;
+  width: 150px;
+  height: 43px;
+  gap: 8px;
+  background-color: white;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.categoryIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.categoryLabel {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+.additionalButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  border: 0px;
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.additionalIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.additionalText {
+  margin-top: 8px;
+  font-size: 14px;
+  color: black;
+}
+
+.categoryButton:hover {
+  background-color: #f0f0f0;
+  transform: translateY(-2px);
+}
+
+.additionalButton:hover {
+  background-color: #f0f0f0;
+  transform: translateY(-2px);
+}
