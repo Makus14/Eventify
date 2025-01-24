@@ -23,7 +23,7 @@ const CategoryNavbar: React.FC<CategoryNavbarProps> = ({ categories }) => {
           src={eventifyIcon}
           alt="Eventify icon"
         />
-        <h2 style={{ fontWeight: "bold" }}>EVENTIFY</h2>
+        <h2 style={{ fontWeight: "bold", marginTop: "15px" }}>EVENTIFY</h2>
       </div>
 
       <div className={classes.category}>
@@ -39,7 +39,7 @@ const CategoryNavbar: React.FC<CategoryNavbarProps> = ({ categories }) => {
         ))}
       </div>
 
-      <div className={classes.category} style={{ marginRight: "30px" }}>
+      <div className={classes.category} style={{ marginRight: "10px" }}>
         <button className={classes.additionalButton}>
           <img
             className={classes.additionalIcon}

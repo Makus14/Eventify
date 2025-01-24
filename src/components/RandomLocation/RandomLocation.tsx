@@ -1,4 +1,4 @@
-import minskImg from "../../assets/minskImg.jpg";
+import minskImg from "../../assets/minskImg.jpeg";
 import classes from "./RandomLocation.module.css";
 
 function RandomLocation() {

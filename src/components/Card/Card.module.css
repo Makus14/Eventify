@@ -1,0 +1,50 @@
+.card {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  height: 250px;
+  overflow: hidden;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  top: 100px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  text-align: center;
+}
+
+.title {
+  font-size: 25px;
+  font-weight: bold;
+  margin: 0;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+.description {
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.card:hover {
+  transform: scale(1.05); /* Легкое увеличение карточки */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}

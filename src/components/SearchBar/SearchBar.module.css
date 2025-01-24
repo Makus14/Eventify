@@ -1,0 +1,13 @@
+.searchContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.inputContainer {
+  height: 50px;
+  width: 85%;
+  max-width: 1490px;
+  min-width: 500px;
+}
