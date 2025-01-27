@@ -5,12 +5,12 @@ interface CardProps {
   image: string;
   title: string;
   description: string;
-  onClick: (title: string) => void;
+  onClick: (description: string) => void;
 }
 
 const Card: React.FC<CardProps> = ({ image, title, description, onClick }) => {
   const handleClick = () => {
-    onClick(title);
+    onClick(description);
   };
 
   return (
