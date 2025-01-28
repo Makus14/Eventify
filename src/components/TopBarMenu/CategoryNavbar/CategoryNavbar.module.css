@@ -11,6 +11,10 @@
   margin-right: 3%;
 }
 
+.navBar a {
+  text-decoration: none;
+}
+
 .eventifyTitle {
   display: flex;
   align-items: center;
@@ -41,6 +45,8 @@
   border-radius: 8px;
   padding: 8px 12px;
   cursor: pointer;
+  text-decoration: none;
+  outline: none;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
@@ -87,3 +93,11 @@
   background-color: #f0f0f0;
   transform: translateY(-2px);
 }
+
+a.activeCategoryButton {
+  background-color: black;
+}
+
+/* .activeCategoryButton {
+  background-color: #c7e7f0;
+} */

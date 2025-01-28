@@ -8,14 +8,15 @@ import saunaIcon from "../../assets/saunaIcon.svg";
 import activeRestIcon from "../../assets/activeRestIcon.svg";
 import drinkIcon from "../../assets/drinkIcon.svg";
 
-const categories = [
-  { icon: eatIcon, label: "Покушать" },
-  { icon: cinemaIcon, label: "Кинотеатры" },
-  { icon: bowlingIcon, label: "Боулинг" },
-  { icon: sportIcon, label: "Спорт" },
-  { icon: saunaIcon, label: "Сауна" },
-  { icon: activeRestIcon, label: "Активный отдых" },
-  { icon: drinkIcon, label: "Выпить" },
+// eslint-disable-next-line react-refresh/only-export-components
+export const categories = [
+  { icon: eatIcon, label: "Покушать", route: "/eat" },
+  { icon: cinemaIcon, label: "Кинотеатры", route: "/cinema" },
+  { icon: bowlingIcon, label: "Боулинг", route: "/bowling" },
+  { icon: sportIcon, label: "Спорт", route: "/sport" },
+  { icon: saunaIcon, label: "Сауна", route: "/sauna" },
+  { icon: activeRestIcon, label: "Активный отдых", route: "/activeRest" },
+  { icon: drinkIcon, label: "Выпить", route: "/drink" },
 ];
 
 function TopBarMenu() {

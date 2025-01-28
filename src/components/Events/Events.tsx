@@ -1,6 +1,6 @@
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 
-import TopBarMenu from "../TopBarMenu/TopBarMenu";
 import RandomLocation from "../RandomLocation/RandomLocation";
 import SearchBar from "../SearchBar/SearchBar";
 import CardContainer from "../CardContainer/CardContainer";
@@ -58,6 +58,8 @@ const mockData = [
 ];
 
 const Events: React.FC = () => {
+  const { category } = useParams<{ category: string }>();
+
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 6;
 
@@ -72,9 +74,8 @@ const Events: React.FC = () => {
 
   return (
     <div>
-      <TopBarMenu />
       <RandomLocation />
-      <SearchBar />
+      <SearchBar total={mockData.length} category={category!} />
       <CardContainer data={paginatedData} />
       <PaginationComponent
         currentPage={currentPage}
