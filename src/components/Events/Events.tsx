@@ -1,87 +1,69 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../store/store";
+import { fetchEvents, setCategory, setPage } from "../../store/eventSlice";
 
+import { categories } from "../TopBarMenu/TopBarMenu";
 import RandomLocation from "../RandomLocation/RandomLocation";
 import SearchBar from "../SearchBar/SearchBar";
 import CardContainer from "../CardContainer/CardContainer";
 import PaginationComponent from "../PaginationComponent/PaginationComponent";
 
-const mockData = [
-  {
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5N_azcdtwehmo4f5g6REz_itFOSplD74HrA&s",
-    title: "Garage food&coffee, кафе",
-    description: "This is a description for Card 1.",
-  },
-  {
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5N_azcdtwehmo4f5g6REz_itFOSplD74HrA&s",
-    title: "Garage food&coffee, кафе",
-    description: "This is a description for Card 2.",
-  },
-  {
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5N_azcdtwehmo4f5g6REz_itFOSplD74HrA&s",
-    title: "Garage food&coffee, кафе",
-    description: "This is a description for Card 3.",
-  },
-  {
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5N_azcdtwehmo4f5g6REz_itFOSplD74HrA&s",
-    title: "Garage food&coffee, кафе",
-    description: "This is a description for Card 4.",
-  },
-  {
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5N_azcdtwehmo4f5g6REz_itFOSplD74HrA&s",
-    title: "Garage food&coffee, кафе",
-    description: "This is a description for Card 5.",
-  },
-  {
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5N_azcdtwehmo4f5g6REz_itFOSplD74HrA&s",
-    title: "Garage food&coffee, кафе",
-    description: "This is a description for Card 6.",
-  },
-  {
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5N_azcdtwehmo4f5g6REz_itFOSplD74HrA&s",
-    title: "Garage food&coffee, кафе",
-    description: "This is a description for Card 7.",
-  },
-  {
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5N_azcdtwehmo4f5g6REz_itFOSplD74HrA&s",
-    title: "Garage food&coffee, кафе",
-    description: "This is a description for Card 8.",
-  },
-];
-
 const Events: React.FC = () => {
   const { category } = useParams<{ category: string }>();
+  const dispatch = useDispatch<AppDispatch>();
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const pageSize = 6;
+  const { events, status, currentCategory, currentPage, total } = useSelector(
+    (state: RootState) => state.events
+  );
+
+  const currentCategoryLabel =
+    categories.find((cat: { route: string }) => cat.route === `/${category}`)
+      ?.label || "Покушать";
+
+  useEffect(() => {
+    if (category && currentCategoryLabel !== currentCategory) {
+      dispatch(setCategory(currentCategoryLabel));
+    }
+
+    // console.log(currentCategoryLabel);
+  }, [category, currentCategoryLabel, dispatch, currentCategory]);
+
+  useEffect(() => {
+    dispatch(fetchEvents());
+  }, [dispatch, currentCategory, currentPage]);
 
   const handlePageChange = (page: number) => {
-    setCurrentPage(page);
+    dispatch(setPage(page));
   };
-
-  const paginatedData = mockData.slice(
-    (currentPage - 1) * pageSize,
-    currentPage * pageSize
-  );
 
   return (
     <div>
       <RandomLocation />
-      <SearchBar total={mockData.length} category={category!} />
-      <CardContainer data={paginatedData} />
+      <SearchBar total={total} category={currentCategoryLabel} />
+
+      {status === "loading" ? (
+        <p>Загрузка...</p>
+      ) : status === "failed" ? (
+        <p>Ошибка загрузки данных</p>
+      ) : (
+        <CardContainer
+          data={events.map((item) => ({
+            image:
+              item.external_content?.[0]?.main_photo_url ||
+              "https://via.placeholder.com/150",
+            title: item.name,
+            description: item.address_name,
+          }))}
+        />
+      )}
+
       <PaginationComponent
         currentPage={currentPage}
-        pageSize={pageSize}
+        pageSize={6}
         onChange={handlePageChange}
-        total={mockData.length}
+        total={total}
       />
     </div>
   );

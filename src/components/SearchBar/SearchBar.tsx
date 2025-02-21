@@ -59,30 +59,12 @@ const SearchBar: React.FC<SearchBarProps> = ({ total, category }) => {
     console.log("click ", e);
   };
 
-  let categoryNow;
-
-  if (category === "eat") {
-    categoryNow = "Покушать";
-  } else if (category === "cinema") {
-    categoryNow = "Кинотеатры";
-  } else if (category === "bowling") {
-    categoryNow = "Боулинг";
-  } else if (category === "sport") {
-    categoryNow = "Спорт";
-  } else if (category === "sauna") {
-    categoryNow = "Сауна";
-  } else if (category === "activeRest") {
-    categoryNow = "Активный отдых";
-  } else if (category === "drink") {
-    categoryNow = "Выпить";
-  }
-
   return (
     <div className={classes.searchContainer}>
       <div className={classes.menuContainer}>
         <div className={classes.textContainer}>
           <Text style={{ fontSize: "20px", fontWeight: "bold" }}>
-            {categoryNow}
+            {category}
           </Text>
           <Text style={{ fontSize: "13px" }}>Найдено: {total}</Text>
         </div>
