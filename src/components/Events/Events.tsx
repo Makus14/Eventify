@@ -43,21 +43,16 @@ const Events: React.FC = () => {
       <RandomLocation />
       <SearchBar total={total} category={currentCategoryLabel} />
 
-      {status === "loading" ? (
-        <p>Загрузка...</p>
-      ) : status === "failed" ? (
-        <p>Ошибка загрузки данных</p>
-      ) : (
-        <CardContainer
-          data={events.map((item) => ({
-            image:
-              item.external_content?.[0]?.main_photo_url ||
-              "https://via.placeholder.com/150",
-            title: item.name,
-            description: item.address_name,
-          }))}
-        />
-      )}
+      <CardContainer
+        data={events.map((item) => ({
+          image:
+            item.external_content?.[0]?.main_photo_url ||
+            "https://via.placeholder.com/150",
+          title: item.name,
+          description: item.address_name,
+        }))}
+        loading={status === "loading"}
+      />
 
       <PaginationComponent
         currentPage={currentPage}

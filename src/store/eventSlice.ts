@@ -24,7 +24,7 @@ const initialState: EventState = {
   events: [],
   status: "idle",
   error: null,
-  currentCategory: "Общественное питание",
+  currentCategory: "Покушать",
   currentPage: 1,
   total: 0,
 };
