@@ -22,6 +22,8 @@ const CardContainer: React.FC<CardContainerProps> = ({ data, loading }) => {
 
     setAllImagesLoaded(false);
 
+    // TODO: Сделать, чтобы текст не загружался заранее картики.
+
     const imagePromises = data.map((item) => {
       return new Promise((resolve) => {
         const img = new Image();
