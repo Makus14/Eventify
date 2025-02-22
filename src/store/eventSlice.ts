@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import apiClient from "../api/apiClient";
 
-const API_KEY = "59233ace-d83e-45af-96cb-7a39f78fc94d"; // Вынести в .env
+const API_KEY = import.meta.env.VITE_API_KEY;
 
 interface EventItem {
   id: string;
