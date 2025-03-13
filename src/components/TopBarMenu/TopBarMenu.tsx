@@ -15,7 +15,7 @@ export const categories = [
   { icon: bowlingIcon, label: "Боулинг", route: "/bowling" },
   { icon: sportIcon, label: "Спорт", route: "/sport" },
   { icon: saunaIcon, label: "Сауна", route: "/sauna" },
-  { icon: activeRestIcon, label: "Активный отдых", route: "/activeRest" },
+  { icon: activeRestIcon, label: "Активный досуг", route: "/activeRest" },
   { icon: drinkIcon, label: "Выпить", route: "/drink" },
 ];
 

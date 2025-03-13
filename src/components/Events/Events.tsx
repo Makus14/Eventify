@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
@@ -18,6 +18,8 @@ const Events: React.FC = () => {
     (state: RootState) => state.events
   );
 
+  const [filteredEvents, setFilteredEvents] = useState(events);
+
   const currentCategoryLabel =
     categories.find((cat: { route: string }) => cat.route === `/${category}`)
       ?.label || "Покушать";
@@ -32,16 +34,35 @@ const Events: React.FC = () => {
     dispatch(fetchEvents());
   }, [dispatch, currentCategory, currentPage]);
 
+  useEffect(() => {
+    setFilteredEvents(events);
+  }, [events]);
+
   const handlePageChange = (page: number) => {
     dispatch(setPage(page));
+  };
+
+  const handleSearch = (query: string) => {
+    if (query) {
+      const filtered = events.filter((item) =>
+        item.name.toLowerCase().includes(query.toLowerCase())
+      );
+      setFilteredEvents(filtered);
+    } else {
+      setFilteredEvents(events);
+    }
   };
 
   return (
     <div>
       <RandomLocation />
-      <SearchBar total={total} category={currentCategoryLabel} />
+      <SearchBar
+        total={total > 30 ? 30 : total}
+        category={currentCategoryLabel}
+        onSearch={handleSearch}
+      />
       <CardContainer
-        data={events.map((item) => ({
+        data={filteredEvents.map((item) => ({
           image:
             item.external_content?.[0]?.main_photo_url ||
             "https://via.placeholder.com/150",
@@ -54,7 +75,7 @@ const Events: React.FC = () => {
         currentPage={currentPage}
         pageSize={6}
         onChange={handlePageChange}
-        total={total}
+        total={total > 30 ? 30 : total}
       />
     </div>
   );

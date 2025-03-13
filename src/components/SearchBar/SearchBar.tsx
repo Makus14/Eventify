@@ -9,6 +9,7 @@ const { Text } = Typography;
 interface SearchBarProps {
   total: number;
   category: string;
+  onSearch: (query: string) => void;
 }
 
 type MenuItem = Required<MenuProps>["items"][number];
@@ -47,12 +48,13 @@ const items2: MenuItem[] = [
   },
 ];
 
-const SearchBar: React.FC<SearchBarProps> = ({ total, category }) => {
+const SearchBar: React.FC<SearchBarProps> = ({ total, category, onSearch }) => {
   const [inputValue, setInputValue] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
-    console.log("Input value:", e.target.value);
+    const value = e.target.value;
+    setInputValue(value);
+    onSearch(value);
   };
 
   const onClick: MenuProps["onClick"] = (e) => {
