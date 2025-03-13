@@ -26,8 +26,6 @@ const Events: React.FC = () => {
     if (category && currentCategoryLabel !== currentCategory) {
       dispatch(setCategory(currentCategoryLabel));
     }
-
-    // console.log(currentCategoryLabel);
   }, [category, currentCategoryLabel, dispatch, currentCategory]);
 
   useEffect(() => {
@@ -42,7 +40,6 @@ const Events: React.FC = () => {
     <div>
       <RandomLocation />
       <SearchBar total={total} category={currentCategoryLabel} />
-
       <CardContainer
         data={events.map((item) => ({
           image:
@@ -53,7 +50,6 @@ const Events: React.FC = () => {
         }))}
         loading={status === "loading"}
       />
-
       <PaginationComponent
         currentPage={currentPage}
         pageSize={6}

@@ -15,46 +15,57 @@ interface CardContainerProps {
 }
 
 const CardContainer: React.FC<CardContainerProps> = ({ data, loading }) => {
-  const [allImagesLoaded, setAllImagesLoaded] = useState(false);
+  const [allDataLoaded, setAllDataLoaded] = useState(false);
 
   useEffect(() => {
     if (data.length === 0) return;
 
-    setAllImagesLoaded(false);
+    setAllDataLoaded(false);
 
-    // TODO: Сделать, чтобы текст не загружался заранее картики.
-
-    const imagePromises = data.map((item) => {
-      return new Promise((resolve) => {
+    const allPromises = data.map((item) => {
+      return new Promise<void>((resolve) => {
         const img = new Image();
         img.src = item.image;
-        img.onload = resolve;
-        img.onerror = resolve;
+        img.onload = () => {
+          if (item.title && item.description) {
+            resolve();
+          }
+        };
+
+        img.onerror = () => resolve();
       });
     });
 
-    Promise.all(imagePromises).then(() => {
-      setAllImagesLoaded(true);
+    Promise.all(allPromises).then(() => {
+      setTimeout(() => {
+        setAllDataLoaded(true);
+      }, 500);
     });
   }, [data]);
 
+  if (loading || !allDataLoaded) {
+    return (
+      <div className={styles.container}>
+        {Array.from({ length: 6 }).map((_, index) => (
+          <div key={index} className={styles.skeleton}>
+            <Skeleton.Image style={{ width: 300, height: 200 }} />
+            <Skeleton active paragraph={{ rows: 2 }} />
+          </div>
+        ))}
+      </div>
+    );
+  }
+
   return (
     <div className={styles.container}>
-      {loading || !allImagesLoaded
-        ? Array.from({ length: 6 }).map((_, index) => (
-            <div key={index} className={styles.skeleton}>
-              <Skeleton.Image style={{ width: 300, height: 200 }} />
-              <Skeleton active paragraph={{ rows: 2 }} />
-            </div>
-          ))
-        : data.map((card, index) => (
-            <Card
-              key={index}
-              image={card.image}
-              title={card.title}
-              description={card.description}
-            />
-          ))}
+      {data.map((card, index) => (
+        <Card
+          key={index}
+          image={card.image}
+          title={card.title}
+          description={card.description}
+        />
+      ))}
     </div>
   );
 };
