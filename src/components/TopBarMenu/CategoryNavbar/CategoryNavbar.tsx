@@ -35,6 +35,28 @@ const CategoryNavbar: React.FC<CategoryNavbarProps> = ({ categories }) => {
           <NavLink
             key={index}
             to={category.route}
+            end
+            className={({ isActive }) =>
+              `${classes.categoryButton} ${
+                isActive ? classes.activeCategoryButton : ""
+              }`
+            }
+          >
+            <img
+              className={classes.categoryIcon}
+              src={category.icon}
+              alt={category.label}
+            />
+            <span className={classes.categoryLabel}>{category.label}</span>
+          </NavLink>
+        ))}
+      </div>
+
+      {/* <div className={classes.category}>
+        {categories.map((category, index) => (
+          <NavLink
+            key={index}
+            to={category.route}
             className={({ isActive }) =>
               isActive ? classes.activeCategoryButton : undefined
             }
@@ -50,7 +72,7 @@ const CategoryNavbar: React.FC<CategoryNavbarProps> = ({ categories }) => {
             </button>
           </NavLink>
         ))}
-      </div>
+      </div> */}
 
       <div className={classes.category} style={{ marginRight: "10px" }}>
         <button className={classes.additionalButton}>

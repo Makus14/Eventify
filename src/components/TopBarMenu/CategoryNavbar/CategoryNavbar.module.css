@@ -50,6 +50,17 @@
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
+/* .categoryButton.active {
+  background-color: #4f46e5;
+  border-color: #4f46e5;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.categoryButton.active .categoryIcon {
+  filter: brightness(0) invert(1);
+} */
+
 .categoryIcon {
   width: 24px;
   height: 24px;
@@ -89,15 +100,12 @@
   transform: translateY(-2px);
 }
 
+.activeCategoryButton {
+  transform: translateY(-2px);
+  border: 1px solid #9aa0c6;
+}
+
 .additionalButton:hover {
   background-color: #f0f0f0;
   transform: translateY(-2px);
 }
-
-a.activeCategoryButton {
-  background-color: black;
-}
-
-/* .activeCategoryButton {
-  background-color: #c7e7f0;
-} */

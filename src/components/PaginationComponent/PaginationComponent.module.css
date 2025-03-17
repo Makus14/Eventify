@@ -1,0 +1,25 @@
+.paginationStyle {
+  :global(.ant-pagination-prev) {
+    background: #e7f2f4;
+    border: 1px solid #bcbcbc;
+  }
+
+  :global(.ant-pagination-next) {
+    background: #e7f2f4;
+    border: 1px solid #bcbcbc;
+  }
+
+  :global(.ant-pagination-item) {
+    background: #e7f2f4;
+    border: 1px solid #bcbcbc;
+  }
+
+  :global(.ant-pagination-item.ant-pagination-item-active) {
+    background-color: #185bc3;
+    border: none;
+  }
+
+  :global(.ant-pagination-item-active a) {
+    color: white;
+  }
+}

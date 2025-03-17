@@ -1,5 +1,7 @@
 import { Pagination } from "antd";
 
+import classes from "./PaginationComponent.module.css";
+
 interface PaginationComponentProps {
   currentPage: number;
   total: number;
@@ -16,6 +18,7 @@ const PaginationComponent: React.FC<PaginationComponentProps> = ({
   return (
     <div style={{ paddingTop: "40px", paddingBottom: "30px" }}>
       <Pagination
+        className={classes.paginationStyle}
         showSizeChanger={false}
         align="center"
         current={currentPage}

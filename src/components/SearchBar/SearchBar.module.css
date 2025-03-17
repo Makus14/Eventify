@@ -38,3 +38,26 @@
   margin-right: 110px;
   min-width: 400px;
 }
+
+.menuItems {
+  :global(.ant-menu.ant-menu-sub.ant-menu-inline) {
+    background: none;
+  }
+
+  :global(.ant-menu-submenu-title) {
+    background: white;
+    color: black !important;
+  }
+
+  :global(.ant-menu-item-group-title) {
+    display: none;
+  }
+
+  :global(.ant-menu-item.ant-menu-item-only-child) {
+    background: white;
+  }
+
+  :global(.ant-menu-item-selected) {
+    color: #260b8f;
+  }
+}

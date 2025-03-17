@@ -72,9 +72,11 @@ const SearchBar: React.FC<SearchBarProps> = ({ total, category, onSearch }) => {
         </div>
         <div className={classes.menuGroup}>
           <Menu
+            className={classes.menuItems}
             onClick={onClick}
             style={{
               width: 200,
+              border: "none",
               backgroundColor: "#e7f2f4",
             }}
             defaultSelectedKeys={["1"]}
@@ -83,6 +85,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ total, category, onSearch }) => {
             items={items1}
           />
           <Menu
+            className={classes.menuItems}
             onClick={onClick}
             style={{ width: 200, backgroundColor: "#e7f2f4", borderRadius: 12 }}
             defaultSelectedKeys={["1"]}
