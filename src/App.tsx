@@ -1,8 +1,8 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import RootLayout from "./pages/Root";
-import EventifyPage from "./pages/Eventify";
-import Events from "./components/Events/Events";
+import EventifyPage from "./pages/EventifyPage";
+import EventsPage from "./pages/EventsPage";
 
 const router = createBrowserRouter([
   {
@@ -11,7 +11,7 @@ const router = createBrowserRouter([
     // errorElement: ...
     children: [
       { index: true, element: <EventifyPage /> },
-      { path: ":category", element: <Events /> },
+      { path: ":category", element: <EventsPage /> },
     ],
   },
 ]);

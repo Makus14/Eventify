@@ -79,17 +79,17 @@ const SearchBar: React.FC<SearchBarProps> = ({ total, category, onSearch }) => {
               border: "none",
               backgroundColor: "#e7f2f4",
             }}
-            defaultSelectedKeys={["1"]}
-            defaultOpenKeys={["sub1"]}
+            // defaultSelectedKeys={["1"]}
+            //defaultOpenKeys={["sub1"]}
             mode="inline"
             items={items1}
           />
           <Menu
             className={classes.menuItems}
             onClick={onClick}
-            style={{ width: 200, backgroundColor: "#e7f2f4", borderRadius: 12 }}
-            defaultSelectedKeys={["1"]}
-            defaultOpenKeys={["sub1"]}
+            style={{ width: 200, border: "none", backgroundColor: "#e7f2f4" }}
+            // defaultSelectedKeys={["1"]}
+            //defaultOpenKeys={["sub1"]}
             mode="inline"
             items={items2}
           />

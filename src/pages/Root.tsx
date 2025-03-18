@@ -1,15 +1,21 @@
-import { Outlet } from "react-router-dom";
-
+import { Outlet, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
 import TopBarMenu from "../components/TopBarMenu/TopBarMenu";
 
 function RootLayout() {
-  // const navigation = useNavigation();
+  const location = useLocation();
+  const [fade, setFade] = useState(true);
+
+  useEffect(() => {
+    setFade(false);
+    const timeout = setTimeout(() => setFade(true), 300);
+    return () => clearTimeout(timeout);
+  }, [location]);
 
   return (
     <>
       <TopBarMenu />
-      <main>
-        {/* {navigation.state === "loading" && <p>Loading...</p>} */}
+      <main className={`fade ${fade ? "fade-in" : "fade-out"}`}>
         <Outlet />
       </main>
     </>
