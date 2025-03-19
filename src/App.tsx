@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootLayout from "./pages/Root";
 import EventifyPage from "./pages/EventifyPage";
 import EventsPage from "./pages/EventsPage";
+import EventDetailsPage from "./pages/EventDetailsPage";
 
 const router = createBrowserRouter([
   {
@@ -12,6 +13,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <EventifyPage /> },
       { path: ":category", element: <EventsPage /> },
+      { path: ":category/:id", element: <EventDetailsPage /> },
     ],
   },
 ]);

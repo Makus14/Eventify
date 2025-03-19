@@ -2,7 +2,12 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store";
-import { fetchEvents, setCategory, setPage } from "../../store/eventSlice";
+import {
+  fetchEvents,
+  setCategory,
+  setPage,
+  clearEvents,
+} from "../../store/eventSlice";
 
 import { categories } from "../TopBarMenu/TopBarMenu";
 import RandomLocation from "../RandomLocation/RandomLocation";
@@ -21,17 +26,20 @@ const Events: React.FC = () => {
   const [filteredEvents, setFilteredEvents] = useState(events);
 
   const currentCategoryLabel =
-    categories.find((cat: { route: string }) => cat.route === `/${category}`)
-      ?.label || "Покушать";
+    categories.find((cat) => cat.route === `/${category}`)?.label || "Покушать";
 
   useEffect(() => {
-    if (category && currentCategoryLabel !== currentCategory) {
+    if (category && currentCategory !== currentCategoryLabel) {
       dispatch(setCategory(currentCategoryLabel));
+      dispatch(setPage(1));
+      dispatch(clearEvents());
+      dispatch(fetchEvents({ category: currentCategoryLabel, page: 1 }));
     }
-  }, [category, currentCategoryLabel, dispatch, currentCategory]);
+  }, [category, currentCategoryLabel, currentCategory, dispatch]);
 
   useEffect(() => {
-    dispatch(fetchEvents());
+    dispatch(clearEvents());
+    dispatch(fetchEvents({ category: currentCategory, page: currentPage }));
   }, [dispatch, currentCategory, currentPage]);
 
   useEffect(() => {
@@ -44,10 +52,11 @@ const Events: React.FC = () => {
 
   const handleSearch = (query: string) => {
     if (query) {
-      const filtered = events.filter((item) =>
-        item.name.toLowerCase().includes(query.toLowerCase())
+      setFilteredEvents(
+        events.filter((item) =>
+          item.name.toLowerCase().includes(query.toLowerCase())
+        )
       );
-      setFilteredEvents(filtered);
     } else {
       setFilteredEvents(events);
     }
@@ -63,11 +72,12 @@ const Events: React.FC = () => {
       />
       <CardContainer
         data={filteredEvents.map((item) => ({
+          id: item.id,
+          title: item.name,
+          description: item.address_name,
           image:
             item.external_content?.[0]?.main_photo_url ||
             "https://via.placeholder.com/150",
-          title: item.name,
-          description: item.address_name,
         }))}
         loading={status === "loading"}
       />

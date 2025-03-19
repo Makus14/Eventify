@@ -4,6 +4,7 @@ import Card from "../Card/Card";
 import styles from "./CardContainer.module.css";
 
 interface EventData {
+  id: string;
   image: string;
   title: string;
   description: string;
@@ -60,6 +61,7 @@ const CardContainer: React.FC<CardContainerProps> = ({ data, loading }) => {
     <div className={styles.container}>
       {data.map((card, index) => (
         <Card
+          id={card.id}
           key={index}
           image={card.image}
           title={card.title}

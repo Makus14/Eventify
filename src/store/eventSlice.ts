@@ -20,31 +20,33 @@ interface EventState {
   total: number;
 }
 
+const savedPage = Number(localStorage.getItem("currentPage")) || 1;
+const savedCategory =
+  String(localStorage.getItem("currentCategory")) || "Покушать";
+
 const initialState: EventState = {
   events: [],
   status: "idle",
   error: null,
-  currentCategory: "Покушать",
-  currentPage: 1,
+  currentCategory: savedCategory,
+  currentPage: savedPage,
   total: 0,
 };
 
 export const fetchEvents = createAsyncThunk<
   { items: EventItem[]; total: number },
-  void,
+  { category: string; page: number },
   { state: { events: EventState }; rejectValue: string }
->("events/fetchEvents", async (_, { getState, rejectWithValue }) => {
+>("events/fetchEvents", async ({ category, page }, { rejectWithValue }) => {
   try {
-    const { currentCategory, currentPage } = getState().events;
-
     const response = await apiClient.get("items", {
       params: {
-        q: currentCategory,
+        q: category,
         fields: "items.external_content",
         location: "27.561831,53.900601",
         key: API_KEY,
         page_size: 6,
-        page: currentPage,
+        page,
         has_photos: true,
       },
     });
@@ -64,11 +66,17 @@ const eventSlice = createSlice({
   initialState,
   reducers: {
     setCategory: (state, action: PayloadAction<string>) => {
-      state.currentCategory = action.payload;
-      state.currentPage = 1;
+      if (state.currentCategory !== action.payload) {
+        state.currentCategory = action.payload;
+      }
+      localStorage.setItem("currentCategory", action.payload);
     },
     setPage: (state, action: PayloadAction<number>) => {
       state.currentPage = action.payload;
+      localStorage.setItem("currentPage", String(action.payload));
+    },
+    clearEvents: (state) => {
+      state.events = [];
     },
   },
   extraReducers: (builder) => {
@@ -88,5 +96,5 @@ const eventSlice = createSlice({
   },
 });
 
-export const { setCategory, setPage } = eventSlice.actions;
+export const { setCategory, setPage, clearEvents } = eventSlice.actions;
 export default eventSlice.reducer;
