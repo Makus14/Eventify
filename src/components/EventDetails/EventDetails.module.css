@@ -1,0 +1,139 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  margin-top: 1%;
+  margin-left: 3%;
+  margin-right: 3%;
+}
+
+.informationContainer {
+  width: 60%;
+}
+
+.nameBlock {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #4f528b;
+  height: auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-radius: 20px;
+}
+
+.baseInfo {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.baseInfo p {
+  margin: auto;
+}
+
+.addressInfo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: white;
+  border-radius: 8px;
+  gap: 5px;
+}
+
+.timeInfo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: white;
+  border-radius: 8px;
+  gap: 5px;
+}
+
+.infoBlock {
+  background-color: white;
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-top: 2%;
+  border-radius: 5px;
+  padding: 40px;
+  padding-bottom: 5px;
+  max-width: 500px;
+  margin-bottom: 20px;
+}
+
+.expandedInfo {
+  overflow: hidden;
+  max-height: 100px;
+  transition: max-height 0.3s ease-out;
+}
+
+.contentExpanded {
+  max-height: 1000px;
+}
+
+.moreInfoButtonContainer {
+  padding: 10px;
+  border-top: 1px solid #eeeeee;
+}
+
+.toggleButton {
+  cursor: pointer;
+  background-color: white;
+  color: blue;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.toggleButton:hover {
+  color: rgb(102, 102, 246);
+}
+
+.mapContainer {
+  position: relative;
+  width: 50%;
+  height: 565px;
+  margin-left: 50px;
+  overflow: hidden;
+}
+
+#mapContainer {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.mapButton {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #007bff;
+  color: white;
+  padding: 12px 25px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+  z-index: 10;
+}
+
+.mapButton:hover {
+  background-color: #0056b3;
+}
+
+#mapContainer canvas {
+  pointer-events: none;
+}
