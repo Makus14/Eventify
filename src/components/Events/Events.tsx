@@ -24,6 +24,7 @@ const Events: React.FC = () => {
   );
 
   const [filteredEvents, setFilteredEvents] = useState(events);
+  const [isSearchActive, setIsSearchActive] = useState(false);
 
   const currentCategoryLabel =
     categories.find((cat) => cat.route === `/${category}`)?.label || "Покушать";
@@ -43,6 +44,9 @@ const Events: React.FC = () => {
   }, [dispatch, currentCategory, currentPage]);
 
   useEffect(() => {
+    // console.log("Events", events.length);
+    // console.log("Filtered", filteredEvents.length);
+    // console.log("Total", total);
     setFilteredEvents(events);
   }, [events]);
 
@@ -50,7 +54,20 @@ const Events: React.FC = () => {
     dispatch(setPage(page));
   };
 
+  // const handleSearch = (query: string) => {
+  //   if (query) {
+  //     setFilteredEvents(
+  //       events.filter((item) =>
+  //         item.name.toLowerCase().includes(query.toLowerCase())
+  //       )
+  //     );
+  //   } else {
+  //     setFilteredEvents(events);
+  //   }
+  // };
+
   const handleSearch = (query: string) => {
+    setIsSearchActive(query.length > 0); // Устанавливаем состояние для поиска
     if (query) {
       setFilteredEvents(
         events.filter((item) =>
@@ -78,15 +95,21 @@ const Events: React.FC = () => {
           image:
             item.external_content?.[0]?.main_photo_url ||
             "https://via.placeholder.com/150",
+          address_name: item.address_name,
+          external_content: item.external_content,
+          point: item.point,
         }))}
         loading={status === "loading"}
       />
-      <PaginationComponent
-        currentPage={currentPage}
-        pageSize={6}
-        onChange={handlePageChange}
-        total={total > 30 ? 30 : total}
-      />
+
+      {!isSearchActive && (
+        <PaginationComponent
+          currentPage={currentPage}
+          pageSize={6}
+          onChange={handlePageChange}
+          total={total > 30 ? 30 : total}
+        />
+      )}
     </div>
   );
 };

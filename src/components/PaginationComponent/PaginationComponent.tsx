@@ -16,7 +16,7 @@ const PaginationComponent: React.FC<PaginationComponentProps> = ({
   onChange,
 }) => {
   return (
-    <div style={{ paddingTop: "40px", paddingBottom: "30px" }}>
+    <div style={{ paddingBottom: "30px" }}>
       <Pagination
         className={classes.paginationStyle}
         showSizeChanger={false}

@@ -12,24 +12,19 @@ import locationLogo from "../../assets/loactionLogo.png";
 import classes from "./EventDetails.module.css";
 
 const EventDetails: React.FC = () => {
-  const { category, id } = useParams<{ category: string; id: string }>();
+  const { category } = useParams<{ category: string }>();
   const dispatch = useDispatch<AppDispatch>();
-  const { events, status, currentPage } = useSelector(
+  const { status, currentPage, selectedEvent } = useSelector(
     (state: RootState) => state.events
   );
 
   // const [isExpanded, setIsExpanded] = useState(false);
 
-  const event = events.find((event) => event.id === id);
-
   const navigate = useNavigate();
 
   useEffect(() => {
     if (category) {
-      const storedCategory = localStorage.getItem("currentCategory");
-      if (storedCategory !== category) {
-        dispatch(setCategory(category));
-      }
+      dispatch(setCategory(category));
       if (status === "idle" || status === "failed") {
         dispatch(fetchEvents({ category, page: currentPage }));
       }
@@ -37,26 +32,20 @@ const EventDetails: React.FC = () => {
   }, [dispatch, status, category, currentPage]);
 
   useEffect(() => {
-    localStorage.setItem("currentPage", String(currentPage));
-    // console.log("Event Data:", event);
-    // console.log("Main Photo URL:", event.external_content[0].main_photo_url);
-  }, [currentPage]);
-
-  useEffect(() => {
     load().then((mapglAPI) => {
       const map = new mapglAPI.Map("mapContainer", {
         key: "7698abba-ede9-44c0-92ca-65e87fd7be37",
-        center: [event!.point!.lon, event!.point!.lat],
+        center: [selectedEvent!.point!.lon, selectedEvent!.point!.lat],
         zoom: 13,
       });
 
       new mapglAPI.Marker(map, {
-        coordinates: [event!.point!.lon, event!.point!.lat],
+        coordinates: [selectedEvent!.point!.lon, selectedEvent!.point!.lat],
       });
     });
-  }, [currentPage, event]);
+  }, [currentPage, selectedEvent]);
 
-  if (status === "loading" || !event) {
+  if (status === "loading" || !selectedEvent) {
     return (
       <div>
         <Skeleton.Image style={{ width: 300, height: 200 }} />
@@ -86,11 +75,11 @@ const EventDetails: React.FC = () => {
         <div className={classes.nameBlock}>
           <img style={{ marginBottom: "7px" }} src={eventDetailsLogo} />
 
-          <h1 style={{ color: "white" }}>{event.name}</h1>
-          {Array.isArray(event.external_content) &&
-            event.external_content.length > 0 && (
+          <h1 style={{ color: "white" }}>{selectedEvent?.name}</h1>
+          {Array.isArray(selectedEvent?.external_content) &&
+            selectedEvent.external_content.length > 0 && (
               <img
-                src={event.external_content[0].main_photo_url}
+                src={selectedEvent?.external_content[0].main_photo_url}
                 alt="Фото события"
                 style={{
                   width: "700px",
@@ -106,7 +95,7 @@ const EventDetails: React.FC = () => {
             <div className={classes.addressInfo}>
               <img src={locationLogo} />
               <p style={{ fontWeight: 400, fontSize: "11px" }}>
-                {event.address_name}
+                {selectedEvent?.address_name}
               </p>
             </div>
 

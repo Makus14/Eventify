@@ -8,6 +8,9 @@ interface EventData {
   image: string;
   title: string;
   description: string;
+  address_name: string;
+  external_content?: { main_photo_url: string }[];
+  point?: { lat: number; lon: number };
 }
 
 interface CardContainerProps {
@@ -66,6 +69,13 @@ const CardContainer: React.FC<CardContainerProps> = ({ data, loading }) => {
           image={card.image}
           title={card.title}
           description={card.description}
+          event={{
+            id: card.id,
+            name: card.title,
+            address_name: card.address_name,
+            external_content: card.external_content,
+            point: card.point,
+          }}
         />
       ))}
     </div>

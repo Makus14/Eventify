@@ -19,19 +19,17 @@ interface EventState {
   currentCategory: string;
   currentPage: number;
   total: number;
+  selectedEvent: EventItem | null;
 }
-
-const savedPage = Number(localStorage.getItem("currentPage")) || 1;
-const savedCategory =
-  String(localStorage.getItem("currentCategory")) || "Покушать";
 
 const initialState: EventState = {
   events: [],
   status: "idle",
   error: null,
-  currentCategory: savedCategory,
-  currentPage: savedPage,
+  currentCategory: "Покушать",
+  currentPage: 1,
   total: 0,
+  selectedEvent: null,
 };
 
 export const fetchEvents = createAsyncThunk<
@@ -70,14 +68,15 @@ const eventSlice = createSlice({
       if (state.currentCategory !== action.payload) {
         state.currentCategory = action.payload;
       }
-      localStorage.setItem("currentCategory", action.payload);
     },
     setPage: (state, action: PayloadAction<number>) => {
       state.currentPage = action.payload;
-      localStorage.setItem("currentPage", String(action.payload));
     },
     clearEvents: (state) => {
       state.events = [];
+    },
+    setSelectedEvent: (state, action: PayloadAction<EventItem | null>) => {
+      state.selectedEvent = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -97,5 +96,6 @@ const eventSlice = createSlice({
   },
 });
 
-export const { setCategory, setPage, clearEvents } = eventSlice.actions;
+export const { setCategory, setPage, clearEvents, setSelectedEvent } =
+  eventSlice.actions;
 export default eventSlice.reducer;
