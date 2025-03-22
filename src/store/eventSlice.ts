@@ -10,6 +10,7 @@ interface EventItem {
   address_comment?: string;
   external_content?: { main_photo_url: string }[];
   point?: { lat: number; lon: number };
+  reviews?: { general_rating: string; general_review_count_with_stars: string };
 }
 
 interface EventState {
@@ -41,7 +42,7 @@ export const fetchEvents = createAsyncThunk<
     const response = await apiClient.get("items", {
       params: {
         q: category,
-        fields: "items.external_content,items.point",
+        fields: "items.external_content,items.point,items.reviews",
         location: "27.561831,53.900601",
         key: API_KEY,
         page_size: 6,

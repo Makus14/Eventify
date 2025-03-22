@@ -25,6 +25,7 @@ const Events: React.FC = () => {
 
   const [filteredEvents, setFilteredEvents] = useState(events);
   const [isSearchActive, setIsSearchActive] = useState(false);
+  const [, setSortOrder] = useState<"asc" | "desc" | null>(null);
 
   const currentCategoryLabel =
     categories.find((cat) => cat.route === `/${category}`)?.label || "Покушать";
@@ -54,20 +55,8 @@ const Events: React.FC = () => {
     dispatch(setPage(page));
   };
 
-  // const handleSearch = (query: string) => {
-  //   if (query) {
-  //     setFilteredEvents(
-  //       events.filter((item) =>
-  //         item.name.toLowerCase().includes(query.toLowerCase())
-  //       )
-  //     );
-  //   } else {
-  //     setFilteredEvents(events);
-  //   }
-  // };
-
   const handleSearch = (query: string) => {
-    setIsSearchActive(query.length > 0); // Устанавливаем состояние для поиска
+    setIsSearchActive(query.length > 0);
     if (query) {
       setFilteredEvents(
         events.filter((item) =>
@@ -79,6 +68,17 @@ const Events: React.FC = () => {
     }
   };
 
+  const handleSort = (order: "asc" | "desc") => {
+    setSortOrder(order);
+    setFilteredEvents((prevEvents) => {
+      return [...prevEvents].sort((a, b) => {
+        const ratingA = Number(a.reviews?.general_rating) || 0;
+        const ratingB = Number(b.reviews?.general_rating) || 0;
+        return order === "asc" ? ratingA - ratingB : ratingB - ratingA;
+      });
+    });
+  };
+
   return (
     <div>
       <RandomLocation />
@@ -86,6 +86,7 @@ const Events: React.FC = () => {
         total={total > 30 ? 30 : total}
         category={currentCategoryLabel}
         onSearch={handleSearch}
+        onSort={handleSort}
       />
       <CardContainer
         data={filteredEvents.map((item) => ({
@@ -98,6 +99,7 @@ const Events: React.FC = () => {
           address_name: item.address_name,
           external_content: item.external_content,
           point: item.point,
+          reviews: item.reviews,
         }))}
         loading={status === "loading"}
       />

@@ -11,6 +11,7 @@ interface EventData {
   address_name: string;
   external_content?: { main_photo_url: string }[];
   point?: { lat: number; lon: number };
+  reviews?: { general_rating: string; general_review_count_with_stars: string };
 }
 
 interface CardContainerProps {
@@ -75,6 +76,7 @@ const CardContainer: React.FC<CardContainerProps> = ({ data, loading }) => {
             address_name: card.address_name,
             external_content: card.external_content,
             point: card.point,
+            reviews: card.reviews,
           }}
         />
       ))}
