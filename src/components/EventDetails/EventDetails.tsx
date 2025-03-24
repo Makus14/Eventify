@@ -9,6 +9,7 @@ import { fetchEvents, setCategory } from "../../store/eventSlice";
 import eventDetailsLogo from "../../assets/eventDetailsLogo.png";
 import timeLogo from "../../assets/timeLogo.png";
 import locationLogo from "../../assets/loactionLogo.png";
+import backArrow from "../../assets/backArrow.png";
 import classes from "./EventDetails.module.css";
 
 const EventDetails: React.FC = () => {
@@ -65,12 +66,22 @@ const EventDetails: React.FC = () => {
   return (
     <div className={classes.container}>
       <div className={classes.informationContainer}>
-        <p
-          style={{ color: "#A5A5A5", cursor: "pointer" }}
-          onClick={handleGoBack}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "5px",
+            marginBottom: "20px",
+          }}
         >
-          Вернутся назад
-        </p>
+          <p
+            style={{ color: "#A5A5A5", cursor: "pointer", margin: 0 }}
+            onClick={handleGoBack}
+          >
+            Вернутся назад
+          </p>
+          <img style={{ height: "17px", width: "20px" }} src={backArrow} />
+        </div>
 
         <div className={classes.nameBlock}>
           <img style={{ marginBottom: "7px" }} src={eventDetailsLogo} />
@@ -78,17 +89,83 @@ const EventDetails: React.FC = () => {
           <h1 style={{ color: "white" }}>{selectedEvent?.name}</h1>
           {Array.isArray(selectedEvent?.external_content) &&
             selectedEvent.external_content.length > 0 && (
-              <img
-                src={selectedEvent?.external_content[0].main_photo_url}
-                alt="Фото события"
-                style={{
-                  width: "700px",
-                  height: "350px",
-                  marginBottom: "10px",
-                  border: "1px solid white",
-                  borderRadius: "10px",
-                }}
-              />
+              <div style={{ position: "relative", display: "inline-block" }}>
+                <img
+                  src={selectedEvent?.external_content[0].main_photo_url}
+                  alt="Фото события"
+                  style={{
+                    width: "500px",
+                    height: "350px",
+                    marginBottom: "10px",
+                    border: "1px solid white",
+                    borderRadius: "10px",
+                  }}
+                />
+                {selectedEvent.reviews?.general_rating !== undefined &&
+                  selectedEvent.reviews?.general_review_count_with_stars !==
+                    undefined && (
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: "8px",
+                        right: "8px",
+                        backgroundColor: "rgba(255, 255, 255, 0.75)",
+                        height: "40px",
+                        width: "80px",
+                        padding: "4px 8px",
+                        borderRadius: "15px",
+                        fontSize: "12px",
+                        color: "#fff",
+                        pointerEvents: "none",
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        gap: "10px",
+                      }}
+                    >
+                      <div>
+                        <span style={{ color: "black", fontSize: "30px" }}>
+                          ★
+                        </span>
+                      </div>
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          flexDirection: "column",
+                        }}
+                      >
+                        <p
+                          style={{
+                            color: "black",
+                            fontSize: 17,
+                            fontWeight: 600,
+                            marginBottom: 0,
+                          }}
+                        >
+                          {selectedEvent.reviews?.general_rating}
+                        </p>
+                        <p
+                          style={{
+                            color: "black",
+                            fontSize: 12,
+                            marginBottom: 0,
+                          }}
+                        >
+                          {Number(
+                            selectedEvent.reviews
+                              ?.general_review_count_with_stars
+                          ) > 200
+                            ? "200+"
+                            : selectedEvent.reviews
+                                ?.general_review_count_with_stars}
+                        </p>
+                      </div>
+                    </div>
+                  )}
+              </div>
             )}
 
           <div className={classes.baseInfo}>

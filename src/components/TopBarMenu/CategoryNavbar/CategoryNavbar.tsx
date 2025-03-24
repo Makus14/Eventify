@@ -2,8 +2,8 @@ import React from "react";
 
 import { NavLink } from "react-router-dom";
 import eventifyIcon from "../../../assets/eventifyIcon.svg";
-import profileIcon from "../../../assets/profileIcon.png";
-import exitIcon from "../../../assets/exitIcon.png";
+// import profileIcon from "../../../assets/profileIcon.png";
+// import exitIcon from "../../../assets/exitIcon.png";
 import classes from "./CategoryNavbar.module.css";
 
 interface Category {
@@ -74,7 +74,7 @@ const CategoryNavbar: React.FC<CategoryNavbarProps> = ({ categories }) => {
         ))}
       </div> */}
 
-      <div className={classes.category} style={{ marginRight: "10px" }}>
+      {/* <div className={classes.category} style={{ marginRight: "10px" }}>
         <button className={classes.additionalButton}>
           <img
             className={classes.additionalIcon}
@@ -92,7 +92,7 @@ const CategoryNavbar: React.FC<CategoryNavbarProps> = ({ categories }) => {
           />
           <span className={classes.additionalText}>Выход</span>
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };

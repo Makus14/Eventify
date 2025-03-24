@@ -48,54 +48,57 @@ const Card: React.FC<CardProps> = ({
           className={styles.image}
           style={{ display: "block" }}
         />
-        <div
-          style={{
-            position: "absolute",
-            top: "8px",
-            right: "8px",
-            backgroundColor: "rgba(255, 255, 255, 0.75)",
-            height: "40px",
-            width: "80px",
-            padding: "4px 8px",
-            borderRadius: "15px",
-            fontSize: "12px",
-            color: "#fff",
-            pointerEvents: "none",
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: "10px",
-          }}
-        >
-          <div>
-            <span style={{ color: "black", fontSize: "30px" }}>★</span>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              flexDirection: "column",
-            }}
-          >
-            <p
+        {event.reviews?.general_rating !== undefined &&
+          event.reviews?.general_review_count_with_stars !== undefined && (
+            <div
               style={{
-                color: "black",
-                fontSize: 17,
-                fontWeight: 600,
-                marginBottom: 0,
+                position: "absolute",
+                top: "8px",
+                right: "8px",
+                backgroundColor: "rgba(255, 255, 255, 0.75)",
+                height: "40px",
+                width: "80px",
+                padding: "4px 8px",
+                borderRadius: "15px",
+                fontSize: "12px",
+                color: "#fff",
+                pointerEvents: "none",
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "10px",
               }}
             >
-              {event.reviews?.general_rating}
-            </p>
-            <p style={{ color: "black", fontSize: 12, marginBottom: 0 }}>
-              {Number(event.reviews?.general_review_count_with_stars) > 200
-                ? "200+"
-                : event.reviews?.general_review_count_with_stars}
-            </p>
-          </div>
-        </div>
+              <div>
+                <span style={{ color: "black", fontSize: "30px" }}>★</span>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  flexDirection: "column",
+                }}
+              >
+                <p
+                  style={{
+                    color: "black",
+                    fontSize: 17,
+                    fontWeight: 600,
+                    marginBottom: 0,
+                  }}
+                >
+                  {event.reviews?.general_rating}
+                </p>
+                <p style={{ color: "black", fontSize: 12, marginBottom: 0 }}>
+                  {Number(event.reviews?.general_review_count_with_stars) > 200
+                    ? "200+"
+                    : event.reviews?.general_review_count_with_stars}
+                </p>
+              </div>
+            </div>
+          )}
 
         <div className={styles.overlay}>
           <h3 className={styles.title}>{title}</h3>

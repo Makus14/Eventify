@@ -35,7 +35,7 @@ const Events: React.FC = () => {
       dispatch(setCategory(currentCategoryLabel));
       dispatch(setPage(1));
       dispatch(clearEvents());
-      dispatch(fetchEvents({ category: currentCategoryLabel, page: 1 }));
+      // dispatch(fetchEvents({ category: currentCategoryLabel, page: 1 }));
     }
   }, [category, currentCategoryLabel, currentCategory, dispatch]);
 

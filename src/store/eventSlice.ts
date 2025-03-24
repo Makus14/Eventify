@@ -66,9 +66,7 @@ const eventSlice = createSlice({
   initialState,
   reducers: {
     setCategory: (state, action: PayloadAction<string>) => {
-      if (state.currentCategory !== action.payload) {
-        state.currentCategory = action.payload;
-      }
+      state.currentCategory = action.payload;
     },
     setPage: (state, action: PayloadAction<number>) => {
       state.currentPage = action.payload;
