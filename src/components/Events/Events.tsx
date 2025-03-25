@@ -40,8 +40,9 @@ const Events: React.FC = () => {
   }, [category, currentCategoryLabel, currentCategory, dispatch]);
 
   useEffect(() => {
-    dispatch(clearEvents());
-    dispatch(fetchEvents({ category: currentCategory, page: currentPage }));
+    if (currentCategory) {
+      dispatch(fetchEvents({ category: currentCategory, page: currentPage }));
+    }
   }, [dispatch, currentCategory, currentPage]);
 
   useEffect(() => {

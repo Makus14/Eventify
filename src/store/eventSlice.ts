@@ -27,7 +27,7 @@ const initialState: EventState = {
   events: [],
   status: "idle",
   error: null,
-  currentCategory: "Покушать",
+  currentCategory: "",
   currentPage: 1,
   total: 0,
   selectedEvent: null,

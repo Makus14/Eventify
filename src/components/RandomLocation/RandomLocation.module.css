@@ -14,16 +14,42 @@
   border-radius: 40px;
 }
 
+.slider {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+}
+
 .image {
+  position: absolute;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  opacity: 0;
+  transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+  transform: scale(1.1);
+  z-index: 1;
+}
+
+.image.active {
+  opacity: 1;
+  transform: scale(1);
+  z-index: 2;
+}
+
+.loadingImage {
+  width: 200px;
+  height: 200px;
+  display: block;
+  margin: 0 auto;
 }
 
 .button {
   position: absolute;
-  height: 45px;
-  margin-top: 17%;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
   background-color: rgba(0, 0, 0, 0.3);
   color: white;
   border: none;
@@ -33,9 +59,9 @@
   border-radius: 12px;
   cursor: pointer;
   backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(5px);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
+  z-index: 10;
 }
 
 .button:hover {
