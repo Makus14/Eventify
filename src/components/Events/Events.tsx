@@ -89,21 +89,36 @@ const Events: React.FC = () => {
         onSearch={handleSearch}
         onSort={handleSort}
       />
-      <CardContainer
-        data={filteredEvents.map((item) => ({
-          id: item.id,
-          title: item.name,
-          description: item.address_name,
-          image:
-            item.external_content?.[0]?.main_photo_url ||
-            "https://via.placeholder.com/150",
-          address_name: item.address_name,
-          external_content: item.external_content,
-          point: item.point,
-          reviews: item.reviews,
-        }))}
-        loading={status === "loading"}
-      />
+
+      {filteredEvents.length === 0 && isSearchActive ? (
+        <div
+          style={{
+            textAlign: "center",
+            fontSize: "16px",
+            color: "gray",
+            paddingTop: "100px",
+            paddingBottom: "100px",
+          }}
+        >
+          Заведения не найдены
+        </div>
+      ) : (
+        <CardContainer
+          data={filteredEvents.map((item) => ({
+            id: item.id,
+            title: item.name,
+            description: item.address_name,
+            image:
+              item.external_content?.[0]?.main_photo_url ||
+              "https://via.placeholder.com/150",
+            address_name: item.address_name,
+            external_content: item.external_content,
+            point: item.point,
+            reviews: item.reviews,
+          }))}
+          loading={status === "loading"}
+        />
+      )}
 
       {!isSearchActive && (
         <PaginationComponent
